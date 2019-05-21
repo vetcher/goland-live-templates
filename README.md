@@ -3,6 +3,8 @@ Useful live templates for goland IDE
 
 ## Golang
 ### if err not nil return  
+Checks that err is not nil and writes return statement with default return values, except last - error. It would be wrapped with (errors.Wrap)[https://godoc.org/github.com/pkg/errors#Wrap]
+errors.Wrap can be easily replaced with fmt.Errorf or any other function
 Abbreviation: 
 ```
 errr
@@ -22,7 +24,7 @@ Applicable: statement
 | $TEXT$   | `errorVariable()`                                              |               |                 |
 
 
-### errors.wrap  
+### errors.Wrap  
 Abbreviation: 
 ```
 wrap

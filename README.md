@@ -17,11 +17,11 @@ if $ERR$ != nil {
 ```
 Applicable: statement
 
-| Name     | Expression                                                     | Default value | Skip if defined |
-|----------|----------------------------------------------------------------|---------------|-----------------|
-| $ERR$    | `errorVariable()`                                              | "err"         |                 |
-| $RETURN$ | `regularExpression(defaultReturnValues, "(^[^,]*\|,.*)$", "")` |               |                 |
-| $TEXT$   | `errorVariable()`                                              |               |                 |
+| Name     | Expression                                               | Default value | Skip if defined |
+|----------|----------------------------------------------------------|---------------|-----------------|
+| $ERR$    | `errorVariable()`                                        | "err"         |                 |
+| $RETURN$ | `regularExpression(defaultReturnValues, "([^,]*$)", "")` |               |                 |
+| $TEXT$   | `errorVariable()`                                        |               |                 |
 
 
 ### errors.Wrap  

@@ -5,6 +5,7 @@ Useful live templates for goland IDE
 ### if err not nil return  
 Checks that err is not nil and writes return statement with default return values, except last - error. It would be wrapped with [errors.Wrap](https://godoc.org/github.com/pkg/errors#Wrap).
 `errors.Wrap` can be easily replaced with fmt.Errorf or any other function
+
 Abbreviation: 
 ```
 errr
@@ -15,7 +16,7 @@ if $ERR$ != nil {
  return $RETURN$errors.Wrap($ERR$, "$TEXT$")$END$
 }
 ```
-Applicable: statement
+Applicable in Go: statement
 
 | Name     | Expression                                               | Default value | Skip if defined |
 |----------|----------------------------------------------------------|---------------|-----------------|
@@ -33,7 +34,7 @@ Template text:
 ```go
 $END$ errors.Wrap($ERR$, "$TEXT$")
 ```
-Applicable: expression, statement
+Applicable in Go: expression, statement
 
 | Name     | Expression                                                     | Default value | Skip if defined |
 |----------|----------------------------------------------------------------|---------------|-----------------|
@@ -52,7 +53,7 @@ Template text:
 ```go
 func $NAME$$END$(slice ...$TYPE$) []$TYPE$ { return slice }
 ```
-Applicable: file
+Applicable in Go: file
 
 | Name     | Expression                                                     | Default value | Skip if defined |
 |----------|----------------------------------------------------------------|---------------|-----------------|
@@ -61,6 +62,7 @@ Applicable: file
 
 ### Json field names in camelCase
 Sometimes we need to declare json fields not in snake_case format (goland used it by default), but in camelCase.
+This pattern also can be applied to any other tags, like `sql`, `pg`, `csv`.
 
 Abbreviation:
 ```
@@ -70,7 +72,7 @@ Template text:
 ```go
 json:"$FIELD_NAME$"
 ```
-Applicable: tag literal
+Applicable in Go: tag literal
 
 | Name         | Expression                                                     | Default value | Skip if defined |
 |--------------|----------------------------------------------------------------|---------------|-----------------|
@@ -92,10 +94,37 @@ func ($REC$ $SLICE$) Less(i, j int) bool {
     panic("implement me")$END$
 }
 ```
-Applicable: file
+Applicable in Go: file
 
 | Name     | Expression                                                     | Default value | Skip if defined |
 |----------|----------------------------------------------------------------|---------------|-----------------|
 | $TYPE$   | complete()                                                     | "Some"        |                 |
 | $SLICE$  |                                                                | "SomeSlice"   |                 |
 | $REC$    |                                                                | "ss"          |                 |
+
+### In
+Checks that value is in slice of some type. In easy way.
+
+Abbreviation:
+```
+in
+```
+
+Template text:
+```go
+func isIn$Type$Slice(v $type$, values ...$type$) bool {
+	for i := range values {
+		if values[i] == v {
+			return true
+		}
+	}
+	return false
+}
+```
+
+Applicable in Go: file
+
+| Name     | Expression                                                     | Default value | Skip if defined |
+|----------|----------------------------------------------------------------|---------------|-----------------|
+| $type$   |                                                                | "string"      |                 |
+| $Type$   |                                                                | "String"      |                 |

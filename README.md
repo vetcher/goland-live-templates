@@ -1,5 +1,5 @@
-# Goland live templates
-Useful live templates for goland IDE
+# Golang code templates
+Useful live templates for Goland IDE.
 
 ## Golang
 ### if err not nil return  

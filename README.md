@@ -1,5 +1,7 @@
 # Golang code templates
-Useful live templates for Goland IDE.
+Useful live templates and code completion for Goland IDE.
+
+Install `settings.zip`: https://www.jetbrains.com/help/go/sharing-live-templates.html#import
 
 ## Golang
 ### if err not nil return  
@@ -128,3 +130,57 @@ Applicable in Go: file
 |----------|----------------------------------------------------------------|---------------|-----------------|
 | $type$   |                                                                | "string"      |                 |
 | $Type$   |                                                                | "String"      |                 |
+
+### Safe getter 
+Generates getter for struct field in protoc-gen-go style. 
+Why do you need it? 
+It allows access to nested fields without worrying about nil pointers.
+
+```go
+type Value struct {
+    Field1 *Struct1
+}
+type Struct1 struct {
+    Field2 *Struct2
+}
+type Struct2 struct {
+    UsefulString *string
+}
+
+var value *Value
+var _ = value.SafeField1().SafeField2().SafeUsefulString()
+
+func (v *Value) SafeField1() *Struct1 {
+	if v == nil {
+		return nil
+	}
+	return v.Field1
+}
+func (s *Struct1) SafeField2() *Struct2 {
+	if s == nil {
+		return nil
+	}
+	return s.Field2
+}
+func (s *Struct2) SafeUsefulString() *string {
+	if s == nil {
+		return nil
+	}
+	return s.UsefulString
+}
+```
+
+Abbreviation:
+```
+getter
+```
+
+Template text:
+```go
+func ($RECEIVER$ *$TYPE_1$) Safe$NAME$() $TYPE_2$ {
+	if $RECEIVER$ == nil {
+		return $RESULT$$END$
+	}
+	return $RECEIVER$.$NAME$
+}
+```
